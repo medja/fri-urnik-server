@@ -14,18 +14,8 @@ class Controller {
                 throw new Exception.NotAllowed();
             }
             
-            const result = await instance[handler]();
-            
             // Send a response if necessary
-            if (!instance.responded) {
-                if (result == null) {
-                    res.end();
-                } else if (result instanceof Model) {
-                    res.send(model.toJSON());
-                } else {
-                    res.send(result.toString());
-                }
-            }
+            instance.send(await instance[handler]())
         } catch (error) {
             // Always use a custom exception
             const exception = do {
@@ -40,6 +30,28 @@ class Controller {
     constructor(req, res) {
         this.request = req;
         this.response = res;
+        
+        this.responded = false;
+    }
+    
+    send(response = null, status = 200) {
+        // A response can only be sent once
+        if (this.responded) {
+            return;
+        }
+        
+        this.response.status(status);
+        
+        // Format the response
+        if (response == null) {
+            this.response.end();
+        } else if (response instanceof Model) {
+            this.response.send(response.toJSON());
+        } else {
+            this.response.send(response.toString());
+        }
+        
+        this.responded = true;
     }
     
 }
