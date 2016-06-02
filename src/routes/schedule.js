@@ -10,6 +10,16 @@ function programs(req, res) {
     return schedule.programs(userAgent);
 }
 
+// Fetches all groups for a program
+function groups(req, res) {
+    const schedule = new Schedule();
+    const program = req.params.program;
+    const userAgent = req.header('user-agent');
+    
+    // Fetch the groups using the user's user agent
+    return schedule.groups(program, userAgent);
+}
+
 // Composes a function for fetching by constraint - key
 function fetch(key) {
     // Excepts the url parameter to be names the same as the key
@@ -26,6 +36,7 @@ function fetch(key) {
 // Define routes for every parameter
 export default [
     route('get', '/schedule', programs),
+    route('get', '/schedule/groups/:program', groups),
     
     route('get', '/schedule/:student', fetch('student')),
     route('get', '/schedule/group/:group', fetch('group')),
