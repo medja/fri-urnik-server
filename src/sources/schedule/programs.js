@@ -7,6 +7,7 @@ function parseProgram(value) {
     const [, year, name] = value.match(Group);
     const parts = name.replace(/\.$/, '').split(', ');
     
+    // Handle descriptive program names
     const program = do {
         if (parts.length == 1) {
             parts[0];
@@ -42,6 +43,7 @@ class Programs extends Parser {
         
         const match = attributes['href'].match(/group=(\d+)$/);
         
+        // Make sure to only use programs (groups)
         if (match) {
             this.name = [];
             this.group = match[1];
@@ -63,6 +65,7 @@ class Programs extends Parser {
         
         const { year, program } = parseProgram(this.name.join(''));
         
+        // Store programs by their study years
         if (!this.programs[year]) {
             this.programs[year] = {};
         }

@@ -17,6 +17,7 @@ class Schedule {
         return parser.parse(url);
     }
     
+    // Fetches programs by their study years
     programs(userAgent = '') {
         const url = this.config.baseUrl;
         const parser = new Programs(userAgent);
