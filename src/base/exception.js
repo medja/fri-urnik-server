@@ -32,4 +32,17 @@ Object.defineProperty(Exception.prototype, 'status', {
     configurable: true
 });
 
+// Define serialization method
+Object.defineProperty(Exception.prototype, 'toJSON', {
+    value: function () {
+        return JSON.stringify({
+            type: this.name,
+            message: this.message
+        }, null, 3);
+    },
+    writable: true,
+    enumerable: false,
+    configurable: true
+});
+
 export default Exception;

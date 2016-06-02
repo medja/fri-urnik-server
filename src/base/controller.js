@@ -33,10 +33,7 @@ class Controller {
                 else new Exception.Internal('Could not process request');
             }
             
-            res.status(exception.status).json({
-                type: exception.name,
-                message: exception.message
-            });
+            res.status(exception.status).send(exception.toJSON());
         }
     }
     
