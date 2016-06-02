@@ -1,5 +1,6 @@
 import Config from './config';
 import Parser from './parser';
+import Programs from './programs';
 
 class Schedule {
     
@@ -14,6 +15,17 @@ class Schedule {
         const parser = new Parser(userAgent);
         
         return parser.parse(url);
+    }
+    
+    programs(userAgent = '') {
+        const url = this.config.baseUrl;
+        const parser = new Programs(userAgent);
+        
+        return parser.parse(url);
+    }
+    
+    groups() {
+        
     }
     
 }
