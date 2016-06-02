@@ -18,11 +18,3 @@ app.use('/api', router);
 app.listen(process.env.PORT, () => {
     console.log(`Server listening on ${process.env.PORT}`);
 });
-
-process.on('uncaughtException', error => {
-    console.log(error);
-});
-
-process.on('unhandledRejection', error => {
-    console.log(error);
-});
