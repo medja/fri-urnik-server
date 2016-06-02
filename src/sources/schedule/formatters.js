@@ -1,9 +1,6 @@
 import { startCase, capitalize } from 'lodash';
 
-// Activity: ACTIVITY_NAME (SOME_ID)_TYPE
-const ACTIVITY = /^(.*)\s*\(\d+\w?\)_\w{1,2}$/;
-// Group: YEAR. letnik, PROGRAM LEVEL, skupina GROUP
-const GROUP = /^(\d)\. letnik, (.*?)(?: ([I\d]+)[.-]?\s?st.*?)?(?:, skupina (\d+))?$/;
+import { Activity, Group } from './patterns';
 
 // Formats the activity name
 function formatActivity(allocation) {
@@ -12,7 +9,7 @@ function formatActivity(allocation) {
     
     // Try to extract the full activity name from the description
     const description = allocation.description.filter(line => line);
-    const match = description[2].match(ACTIVITY);
+    const match = description[2].match(Activity);
     
     // Return an object (id, name) pair for the activity
     return { [id]: match ? match[1] : activity };
@@ -33,14 +30,14 @@ function formatNamePart(part) {
 // Formats the schedule title
 function formatTitle(title) {
     // Check if this is an activity
-    const activity = title.match(ACTIVITY);
+    const activity = title.match(Activity);
     
     if (activity) {
         return activity[1];
     }
     
     // Check if this is a group or a program
-    const group = title.match(GROUP);
+    const group = title.match(Group);
     
     if (group) {
         return formatGroup(group);
