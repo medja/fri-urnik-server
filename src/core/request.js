@@ -35,13 +35,17 @@ class Request {
             res.on('end', ::this.onEnd);
         } else {
             // Trigger an exception if the request failed
-            this.onError(new Exception(`Cannot get ${this.url}`));
+            this.onError(new HttpException(`Cannot get ${this.url}`));
         }
     }
     
     onData(data) {}
     onError(error) {}
     onEnd() {}
+    
+}
+
+class HttpException extends Exception {
     
 }
 
