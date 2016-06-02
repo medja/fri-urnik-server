@@ -1,50 +1,25 @@
 import { Schedule } from '../sources';
-import { Exception, route } from '../core';
+import { route } from '../core';
 
-async function programs(req, res) {
-    try {
-        const schedule = new Schedule();
-        const userAgent = req.header('user-agent');
-        
-        res.json(await schedule.programs(userAgent));
-    } catch (exception) {
-        if (exception instanceof Exception) {
-            res.status(exception.status).json({
-                [exception.name]: exception.message
-            });
-        } else {
-            res.status(500).json({
-                'Error': 'Internal server error'
-            });
-        }
-    }
+// Fetches all programs by study years
+function programs(req, res) {
+    const schedule = new Schedule();
+    const userAgent = req.header('user-agent');
+    
+    // Fetch the programs using the user's user agent
+    return schedule.programs(userAgent);
 }
 
 // Composes a function for fetching by constraint - key
 function fetch(key) {
     // Excepts the url parameter to be names the same as the key
-    return async function fetchByKey(req, res) {
+    return function fetchByKey(req, res) {
+        const schedule = new Schedule();
+        const params = { [key]: req.params[key] };
+        const userAgent = req.header('user-agent');
         
-        try {
-            // Constructs a new schedule for the current date
-            const schedule = new Schedule();
-            const params = { [key]: req.params[key] };
-            const userAgent = req.header('user-agent');
-            
-            // Fetch the schedule using the user's user agent
-            res.json(await schedule.fetch(params, userAgent));
-        } catch (exception) {
-            // Display the custom exception or an 500 internal error
-            if (exception instanceof Exception) {
-                res.status(exception.status).json({
-                    [exception.name]: exception.message
-                });
-            } else {
-                res.status(500).json({
-                    'Error': 'Internal server error'
-                });
-            }
-        }
+        // Fetch the schedule using the user's user agent
+        return schedule.fetch(params, userAgent);
     };
 }
 
