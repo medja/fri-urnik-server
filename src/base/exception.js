@@ -34,15 +34,32 @@ Object.defineProperty(Exception.prototype, 'status', {
 
 // Define serialization method
 Object.defineProperty(Exception.prototype, 'toJSON', {
+    writable: true,
+    enumerable: false,
+    configurable: true,
+    
     value: function () {
         return JSON.stringify({
             type: this.name,
             message: this.message
         }, null, 3);
-    },
-    writable: true,
+    }
+});
+
+// Define exception registration method to prevent circular dependencies
+Object.defineProperty(Exception, 'register', {
+    writable: false,
     enumerable: false,
-    configurable: true
+    configurable: false,
+    
+    value: function (name, Type) {
+        Object.defineProperty(Exception, name, {
+            value: Type,
+            writable: false,
+            enumerable: false,
+            configurable: false
+        });
+    }
 });
 
 export default Exception;

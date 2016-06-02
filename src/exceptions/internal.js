@@ -8,12 +8,6 @@ class InternalException extends Exception {
     
 }
 
-// Defined on Exception to prevent circular dependency
-Object.defineProperty(Exception, 'Internal', {
-    value: InternalException,
-    writable: false,
-    enumerable: false,
-    configurable: false
-});
+Exception.register('Internal', InternalException);
 
 export default InternalException;

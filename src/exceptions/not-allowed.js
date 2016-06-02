@@ -10,12 +10,6 @@ class NotAllowedException extends Exception {
     
 }
 
-// Defined on Exception to prevent circular dependency
-Object.defineProperty(Exception, 'NotAllowed', {
-    value: NotAllowedException,
-    writable: false,
-    enumerable: false,
-    configurable: false
-});
+Exception.register('NotAllowed', NotAllowedException);
 
 export default NotAllowedException;
