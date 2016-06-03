@@ -1,3 +1,5 @@
+import Activity from './activity';
+import Allocation from './allocation';
 import Classroom from './classroom';
 import Group from './group';
 import Program from './program';
@@ -6,7 +8,9 @@ import Student from './student';
 import Teacher from './teacher';
 
 export {
-    Classroom
+    Activity,
+    Allocation,
+    Classroom,
     Group,
     Program,
     Schedule,

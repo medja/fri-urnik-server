@@ -4,4 +4,4 @@ class Program extends Group {
     
 }
 
-export default Schedule;
+export default Program;
