@@ -13,7 +13,7 @@ class Request {
         };
     }
     
-    get() {
+    get(url) {
         const { hostname, path } = parse(url);
         
         const options = {
@@ -24,14 +24,14 @@ class Request {
         };
         
         return new Promise((...args) => {
-            const handler = this.handleResponse.bind(this, url, ...args);
+            const handler = this.handleResponse.bind(this, ...args, url);
             
             // Initiate a request with no body
             request(options, handler).end();
         });
     }
     
-    handleResponse(url, res, resolve, reject) {
+    handleResponse(resolve, reject, url, res) {
         // Check if the response status is 2xx
         if (res.statusCode / 100 | 0 === 2) {
             resolve(new Response(res));

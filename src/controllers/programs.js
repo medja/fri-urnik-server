@@ -1,5 +1,4 @@
 import { Controller } from '../base';
-import { NotAllowedException } from '../exceptions';
 
 class ProgramsController extends Controller {
     

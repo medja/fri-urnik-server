@@ -2,6 +2,9 @@ import express from 'express';
 import helmet from 'helmet';
 import router from './router';
 
+// Load and register all exceptions
+import './exceptions';
+
 const app = express();
 
 app.use(helmet());

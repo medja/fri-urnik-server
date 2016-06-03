@@ -1,7 +1,9 @@
 class Model {
     
-    toJSON() {
-        
+    constructor(values = null) {
+        if (values != null) {
+            Object.assign(this, values);
+        }
     }
     
 }

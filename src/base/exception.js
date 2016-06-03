@@ -38,11 +38,11 @@ Object.defineProperty(Exception.prototype, 'toJSON', {
     enumerable: false,
     configurable: true,
     
-    value: function () {
-        return JSON.stringify({
+    value: function() {
+        return {
             type: this.name,
             message: this.message
-        }, null, 3);
+        };
     }
 });
 

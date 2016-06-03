@@ -23,8 +23,12 @@ class Controller {
                 else new Exception.Internal('Could not process request');
             }
             
-            res.status(exception.status).send(exception.toJSON());
+            res.status(exception.status).send(this.toJSON(exception));
         }
+    }
+    
+    static toJSON(value) {
+        return JSON.stringify(value, null, 3);
     }
     
     constructor(req, res) {
@@ -46,12 +50,28 @@ class Controller {
         if (response == null) {
             this.response.end();
         } else if (response instanceof Model) {
-            this.response.send(response.toJSON());
+            this.response.send(this.toJSON(response));
         } else {
             this.response.send(response.toString());
         }
         
         this.responded = true;
+    }
+    
+    header(name) {
+        return this.request.header(name);
+    }
+    
+    param(name, fallback = null) {
+        if (name in this.request.params) {
+            return this.request.params[name];
+        } else {
+            return fallback;
+        }
+    }
+    
+    toJSON(value) {
+        return this.constructor.toJSON(value);
     }
     
 }

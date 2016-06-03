@@ -1,8 +1,14 @@
 class Response {
     
     constructor(res) {
-        res.on('data', ::this.onData);
-        res.on('end', ::this.onEnd);
+        this.response = res;
+        
+        res.on('data', data => this.onData(data));
+        res.on('end', () => this.onEnd());
+    }
+    
+    get status() {
+        return this.response.statusCode
     }
     
     onData(data) {}
