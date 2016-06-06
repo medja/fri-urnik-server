@@ -15,7 +15,7 @@ class Controller {
             }
             
             // Send a response if necessary
-            instance.send(await instance[handler]())
+            instance.send(await instance[handler]());
         } catch (error) {
             // Always use a custom exception
             const exception = do {
@@ -49,10 +49,8 @@ class Controller {
         // Format the response
         if (response == null) {
             this.response.end();
-        } else if (response instanceof Model) {
-            this.response.send(this.toJSON(response));
         } else {
-            this.response.send(response.toString());
+            this.response.send(this.toJSON(response));
         }
         
         this.responded = true;

@@ -25,7 +25,7 @@ class ScheduleRequest extends Request {
         // Winter semester is october through january
         // Summer semester is january through september
         if (month === 0 || month > 8) {
-            return 'zimski'
+            return 'zimski';
         } else {
             return 'letni';
         }
@@ -48,9 +48,9 @@ class ScheduleRequest extends Request {
         return `${base}/allocations?${query}`;
     }
     
-    schedule(id, field) {
+    schedule(id, type) {
         // Find the url for the resource
-        return this.get(this.constructor.getUrl({ [field]: id }));
+        return this.get(this.constructor.getUrl({ [type]: id }));
     }
     
 }

@@ -17,7 +17,7 @@ class GroupsController extends Controller {
         const request = new Request(userAgent);
         const response = await request.schedule(id, 'group');
         
-        const parser = new Parser();
+        const parser = new Parser(id, 'group');
         const schedule = await parser.parse(response);
         
         return schedule;

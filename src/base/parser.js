@@ -20,6 +20,10 @@ class Parser {
         this.parser = new html.Parser(handlers, options);
     }
     
+    get result() {
+        return null;
+    }
+    
     parse(response) {
         response.onData = data => this.parser.write(data.toString());
         response.onEnd = () => this.parser.end();

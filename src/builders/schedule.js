@@ -5,11 +5,14 @@ const DAYS = [ 'MON', 'TUE', 'WED', 'THU', 'FRI' ];
 
 class ScheduleBuilder extends Builder {
     
-    constructor() {
+    constructor(id, type) {
         super();
         
-        // TODO: Provide schedule id
-        this.result = new Schedule();
+        this.schedule = new Schedule(id, type);
+    }
+    
+    get result() {
+        return this.schedule;
     }
     
     setActive(name, id = null) {
@@ -47,9 +50,6 @@ class ScheduleBuilder extends Builder {
             hour: this.hour,
             lecture: types.includes('P'),
             timespan: parseInt(timespan, 10),
-            
-            teachers: [],
-            groups: []
         });
     }
     
@@ -66,37 +66,42 @@ class ScheduleBuilder extends Builder {
         
         switch (this.active) {
             case 'title':
-                if (this.title == null) {
-                    this.title = value.trim();
+                if (this.schedule.parent.name == null) {
+                    this.schedule.parent.name = value;
                 }
                 break;
+                
             case 'hour':
                 this.hour = parseInt(value.split(':')[0], 10);
                 break;
+                
             case 'activity':
                 this.allocation.activity = new Activity({
                     id: this.id,
                     name: value.trim()
                 });
                 break;
+                
             case 'classroom':
                 this.allocation.classroom = new Classroom({
                     id: this.id,
                     name: value.trim()
                 });
                 break;
+                
             case 'teacher':
                 this.allocation.teachers.push(new Teacher({
                     id: this.id,
                     name: value.trim()
                 }));
                 break;
+                
             case 'group':
                 this.allocation.groups.push(new Group({
-                    id: this.id,
-                    name: value.trim()
+                    id: this.id
                 }));
                 break;
+                
             case 'description':
                 const lines = value.split('\n').map(line => line.trim());
                 this.allocation.description = lines.filter(line => line);
@@ -111,7 +116,7 @@ class ScheduleBuilder extends Builder {
             return;
         }
         
-        this.result.addAllocation(this.allocation);
+        this.schedule.add(this.allocation);
         this.allocation = null;
         
     }

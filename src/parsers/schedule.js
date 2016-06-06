@@ -3,10 +3,10 @@ import { ScheduleBuilder as Builder } from '../builders';
 
 class ScheduleParser extends Parser {
     
-    constructor() {
+    constructor(id, type) {
         super();
         
-        this.builder = new Builder();
+        this.builder = new Builder(id, type);
     }
     
     get result() {
@@ -56,7 +56,9 @@ class ScheduleParser extends Parser {
             this.builder.endHour();
         } else if (tag === 'td') {
             this.builder.endAllocation();
-        } else if (tag !== 'br') {
+        }
+        
+        if (tag !== 'br') {
             this.builder.endAttribute();
         }
     }
