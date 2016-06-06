@@ -1,6 +1,10 @@
 import { Controller } from '../base';
-import { ScheduleParser as Parser } from '../parsers';
 import { ScheduleRequest as Request } from '../requests';
+
+import {
+    ScheduleParser as Parser,
+    ScheduleIndexParser as IndexParser
+} from '../parsers';
 
 class ActivitiesController extends Controller {
     
@@ -9,6 +13,18 @@ class ActivitiesController extends Controller {
         '/activities/:id':            'show',
         '/activities/:id/schedules':  'schedules'
     };
+    
+    async list() {
+        const userAgent = this.header('user-agent');
+        
+        const request = new Request(userAgent);
+        const response = await request.index();
+        
+        const parser = new IndexParser('subject');
+        const index = await parser.parse(response);
+        
+        return index;
+    }
     
     async schedules() {
         const id = this.param('id');

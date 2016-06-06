@@ -1,4 +1,9 @@
 import { Controller } from '../base';
+import { ScheduleRequest as Request } from '../requests';
+
+import {
+    ScheduleIndexParser as IndexParser
+} from '../parsers';
 
 class ProgramsController extends Controller {
     
@@ -8,12 +13,30 @@ class ProgramsController extends Controller {
         '/programs/:id/groups':  'groups'
     };
     
-    list() {
+    async list() {
+        const userAgent = this.header('user-agent');
         
+        const request = new Request(userAgent);
+        const response = await request.index();
+        
+        const parser = new IndexParser('group');
+        const index = await parser.parse(response);
+        
+        return index;
     }
     
-    groups() {
+    async groups() {
+        const id = this.param('id');
+        const initial = parseInt(id, 10) + 1;
+        const userAgent = this.header('user-agent');
         
+        const request = new Request(userAgent);
+        const response = await request.schedule(id, 'group');
+        
+        const parser = new IndexParser('group', initial);
+        const index = await parser.parse(response);
+        
+        return index;
     }
     
 }

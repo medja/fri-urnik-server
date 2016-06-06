@@ -1,6 +1,10 @@
 import { Controller } from '../base';
-import { ScheduleParser as Parser } from '../parsers';
 import { ScheduleRequest as Request } from '../requests';
+
+import {
+    ScheduleParser as Parser,
+    ScheduleIndexParser as IndexParser
+} from '../parsers';
 
 class TeachersController extends Controller {
     
@@ -10,6 +14,17 @@ class TeachersController extends Controller {
         '/teachers/:id/schedules':  'schedules'
     };
     
+    async list() {
+        const userAgent = this.header('user-agent');
+        
+        const request = new Request(userAgent);
+        const response = await request.index();
+        
+        const parser = new IndexParser('teacher');
+        const index = await parser.parse(response);
+        
+        return index;
+    }
     
     async schedules() {
         const id = this.param('id');

@@ -48,6 +48,10 @@ class ScheduleRequest extends Request {
         return `${base}/allocations?${query}`;
     }
     
+    index() {
+        return this.get(this.constructor.getUrl());
+    }
+    
     schedule(id, type) {
         // Find the url for the resource
         return this.get(this.constructor.getUrl({ [type]: id }));

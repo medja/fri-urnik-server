@@ -25,7 +25,11 @@ class Activity extends Model {
     }
     
     get lecture() {
-        return this.type === 'P';
+        if (this.type == null) {
+            return undefined;
+        } else {
+            return this.type === 'P';
+        }
     }
     
     toJSON() {
