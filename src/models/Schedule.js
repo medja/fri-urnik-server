@@ -5,12 +5,14 @@ import { Model } from '../base';
 import Activity from './Activity';
 import Classroom from './Classroom';
 import Group from './Group';
+import Student from './Student';
 import Teacher from './Teacher';
 
 const Parents = {
     activity: Activity,
     classroom: Classroom,
     group: Group,
+    student: Student,
     teacher: Teacher
 };
 

@@ -33,7 +33,7 @@ function extractShortName(name) {
     const type = words.pop();
     
     // Some programs don't have a type
-    if (isAcronym(type)) {
+    if (!isAcronym(type)) {
         // Just use the first word, type in case of only one word
         return words[0] || type;
     }
