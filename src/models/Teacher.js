@@ -11,7 +11,9 @@ class Teacher extends Model {
     }
     
     set name(value) {
+        // First and last names are divided by a comma
         this[NAME] = value.split(', ').reverse().map(name => {
+            // Multiple names can be joined together with dashes
             return name.split('-').map(part => {
                 return startCase(part.toLowerCase());
             }).join('-');
