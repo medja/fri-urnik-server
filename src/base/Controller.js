@@ -1,5 +1,5 @@
-import Exception from './exception';
-import Model from './model';
+import Exception from './Exception';
+import Model from './Model';
 
 class Controller {
     

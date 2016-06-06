@@ -1,4 +1,4 @@
-import ScheduleParser from './schedule';
+import ScheduleParser from './ScheduleParser';
 
 export {
     ScheduleParser

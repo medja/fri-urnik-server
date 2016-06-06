@@ -1,6 +1,6 @@
 import html from 'htmlparser2';
 
-import Exception from './exception';
+import Exception from './Exception';
 
 class Parser {
     

@@ -1,8 +1,8 @@
 import { request } from 'https';
 import { parse } from 'url';
 
-import Exception from './exception';
-import Response from './response';
+import Exception from './Exception';
+import Response from './Response';
 
 class Request {
     

@@ -1,7 +1,7 @@
-import InternalException from './internal';
-import NotAllowedException from './not-allowed'
-import ParserException from './parser';
-import RequestException from './request';
+import InternalException from './InternalException';
+import NotAllowedException from './NotAllowedException';
+import ParserException from './ParserException';
+import RequestException from './RequestException';
 
 export {
     InternalException,

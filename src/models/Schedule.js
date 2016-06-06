@@ -2,10 +2,10 @@ import { sortBy } from 'lodash';
 
 import { Model } from '../base';
 
-import Activity from './activity';
-import Classroom from './classroom';
-import Group from './group';
-import Teacher from './teacher';
+import Activity from './Activity';
+import Classroom from './Classroom';
+import Group from './Group';
+import Teacher from './Teacher';
 
 const Parents = {
     activity: Activity,

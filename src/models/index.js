@@ -1,10 +1,10 @@
-import Activity from './activity';
-import Allocation from './allocation';
-import Classroom from './classroom';
-import Group from './group';
-import Schedule from './schedule';
-import Student from './student';
-import Teacher from './teacher';
+import Activity from './Activity';
+import Allocation from './Allocation';
+import Classroom from './Classroom';
+import Group from './Group';
+import Schedule from './Schedule';
+import Student from './Student';
+import Teacher from './Teacher';
 
 export {
     Activity,

@@ -1,4 +1,4 @@
-import ScheduleBuilder from './schedule';
+import ScheduleBuilder from './ScheduleBuilder';
 
 export {
     ScheduleBuilder

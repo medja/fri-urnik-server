@@ -1,4 +1,4 @@
-import ScheduleRequest from './schedule';
+import ScheduleRequest from './ScheduleRequest';
 
 export {
     ScheduleRequest

@@ -1,9 +1,9 @@
-import ActivitiesController from './activities';
-import ClassroomsController from './classrooms';
-import GroupsController from './groups';
-import ProgramsController from './programs';
-import StudentsController from './students';
-import TeachersController from './teachers';
+import ActivitiesController from './ActivitiesController';
+import ClassroomsController from './ClassroomsController';
+import GroupsController from './GroupsController';
+import ProgramsController from './ProgramsController';
+import StudentsController from './StudentsController';
+import TeachersController from './TeachersController';
 
 export {
     ActivitiesController,
