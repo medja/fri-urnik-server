@@ -33,6 +33,7 @@ class Allocation extends Model {
         return {
             day: this.day,
             hour: this.hour,
+            timespan: this.timespan,
             activity: this.activity,
             classroom: this.classroom,
             teachers: this.teachers,
