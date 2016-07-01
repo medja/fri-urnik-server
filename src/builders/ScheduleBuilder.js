@@ -33,7 +33,7 @@ class ScheduleBuilder extends Builder {
         this.setActive('hour');
     }
     
-    startAllocation(types, timespan) {
+    startAllocation(types, duration) {
         // Check if this is an hour node
         if (types.includes('hour')) {
             this.startHour();
@@ -49,7 +49,7 @@ class ScheduleBuilder extends Builder {
             day: DAYS.indexOf(types[0]),
             hour: this.hour,
             lecture: types.includes('P'),
-            timespan: parseInt(timespan, 10),
+            duration: parseInt(duration, 10),
         });
     }
     
