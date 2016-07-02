@@ -1,7 +1,7 @@
 import { Model } from '../base';
 
-// Matches the year, program name, program level and group number from a descriptio
-const PATTERN = /^(\d)\. letnik, (.*?)\.?(?: ([I\d]+)[.-]?\s?st.*?)?(?: \(.+\))?(?:, skupina.* (\d+))?$/;
+// Matches the year, program name, program level, activity and group number from a description
+const PATTERN = /^(\d)\. letnik, (.*?)\.?(?: ([I\d]+)[.-]?\s?st.*?)?(?: \((.+)\))?(?:, skupina.* (\d+))?$/;
 
 const NAME = Symbol('NAME');
 const YEAR = Symbol('YEAR');
@@ -71,11 +71,12 @@ class Group extends Model {
         }
         
         // In case of a description extract the rest of the fields
-        const [ year, name, level, group ] = match.slice(1);
+        const [ year, name, level, activity, group ] = match.slice(1);
         
         this.year = year;
         this.level = level;
         this.group = group;
+        this.activity = activity;
         
         this[NAME] = formatName(name);
         this.short = extractShortName(this[NAME]);
@@ -127,6 +128,7 @@ class Group extends Model {
             id: this.id,
             name: this.name,
             short: this.short,
+            activity: this.activity,
             year: this.year,
             level: this.level,
             group: this.group
