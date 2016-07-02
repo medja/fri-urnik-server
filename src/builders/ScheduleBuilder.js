@@ -98,7 +98,8 @@ class ScheduleBuilder extends Builder {
                 
             case 'group':
                 this.allocation.groups.push(new Group({
-                    id: this.id
+                    id: this.id,
+                    tag: value.trim()
                 }));
                 break;
                 

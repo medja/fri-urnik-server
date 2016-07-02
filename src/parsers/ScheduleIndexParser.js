@@ -3,37 +3,21 @@ import { ScheduleIndexBuilder as Builder } from '../builders';
 
 class ScheduleIndexParser extends Parser {
     
-    constructor(type, initial = null) {
+    constructor(type) {
         super();
         
-        this.inital = initial;
-        this.builder = new Builder(type, initial);
+        this.builder = new Builder(type);
     }
     
     get result() {
         return this.builder.result;
     }
     
-    itTitle(tag) {
-        // When parsing using an initial id process titles as
-        // they may contain the parent's information
-        return this.inital != null && tag == 'h2';
-    }
-    
     isSection(tag) {
-        if (this.inital) {
-            return tag === 'p';
-        } else {
-            return tag === 'div';
-        }
+        return tag === 'div';
     }
     
     onOpenTag(tag, attrs) {
-        if (this.itTitle(tag)) {
-            this.builder.startTitle();
-            return;
-        }
-        
         // Only index a predefined section of the site
         if (this.isSection(tag)) {
             this.builder.startSection();

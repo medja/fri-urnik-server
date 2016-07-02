@@ -1,4 +1,4 @@
-import { sortBy } from 'lodash';
+import { flatMap, sortBy, uniqBy } from 'lodash';
 
 import { Model } from '../base';
 
@@ -31,6 +31,35 @@ class Schedule extends Model {
     add(allocation) {
         this.allocations.push(allocation);
         allocation.update();
+    }
+    
+    get groups() {
+        const fields = [ 'name', 'year', 'level' ];
+        
+        const groups = flatMap(this.allocations, allocation => {
+            return allocation.groups.filter(allocation => {
+                if (allocation.id == this.parent.id) {
+                    return false;
+                }
+                
+                if (allocation.group == null) {
+                    return false;
+                }
+                
+                return fields.every(field => {
+                    return allocation[field] == this.parent[field];
+                });
+            });
+        });
+        
+        return {
+            index: sortBy(uniqBy(groups, 'id'), [
+                // Make sure groups without activities and tags sorted first
+                (group => group.activity || ''),
+                (group => group.tag || ''),
+                'group'
+            ])
+        };
     }
     
     toJSON() {

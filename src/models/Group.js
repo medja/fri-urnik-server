@@ -2,7 +2,9 @@ import { Model } from '../base';
 
 // Matches the year, program name, program level, activity and group number from a description
 const PATTERN = /^(\d)\. letnik, (.*?)\.?(?: ([I\d]+)[.-]?\s?st.*?)?(?: \((.+)\))?(?:, skupina.* (\d+))?$/;
+const TAG_PATTERN = /\((\w+)\)/;
 
+const TAG = Symbol('TAG');
 const NAME = Symbol('NAME');
 const YEAR = Symbol('YEAR');
 const LEVEL = Symbol('LEVEL');
@@ -57,6 +59,18 @@ function isAcronym(value) {
 }
 
 class Group extends Model {
+    
+    get tag() {
+        return this[TAG];
+    }
+    
+    set tag(value) {
+        const match = value.match(TAG_PATTERN);
+        
+        if (match) {
+            this[TAG] = match[1];
+        }
+    }
     
     get name() {
         return this[NAME];
@@ -129,6 +143,7 @@ class Group extends Model {
             name: this.name,
             short: this.short,
             activity: this.activity,
+            tag: this.tag,
             year: this.year,
             level: this.level,
             group: this.group
